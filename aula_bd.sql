@@ -15,8 +15,19 @@ id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(255) NOT NULL UNIQUE,
 sigla CHAR(2) NOT NULL UNIQUE,
 ativo  CHAR(1) NOT NULL DEFAULT 'S'
-
 );
+
+CREATE TABLE cidade(
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(255) NOT NULL,
+estado_id INT NOT NULL,
+ativo CHAR(1) NOT NULL DEFAULT 'S',
+CHECK (ativo IN('S', 'N')),
+FOREIGN KEY(estado_id) REFERENCES estado (id)
+);
+
+INSERT INTO cidade(nome, estado_id) VALUE('PARANAVAÍ', '1');
+SELECT nome, cidade_id FROM cidade;
 
 INSERT INTO estado(id, nome, sigla, ativo)
 VALUE (NULL, 'PARANÁ','PR', 'S');
